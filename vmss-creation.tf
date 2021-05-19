@@ -37,15 +37,28 @@ resource "azurerm_linux_virtual_machine_scale_set" "buildagent-vmss" {
   }
 }
 
-resource "azurerm_virtual_machine_scale_set_extension" "Devops_VM_ext" {
+resource "azurerm_virtual_machine_scale_set_extension" "newvmext" {
   name                         = "newvmext"
   virtual_machine_scale_set_id = azurerm_linux_virtual_machine_scale_set.buildagent-vmss.id
   publisher                    = "Microsoft.Azure.Extensions"
   type                         = "CustomScript"
   type_handler_version         = "2.0"
-  protected_settings           = <<PROT
-  {
+  settings = jsonencode({
     "script": "${base64encode(file(var.scfile))}"
-  }
-  PROT
+  })
 }
+
+
+# resource "azurerm_virtual_machine_scale_set_extension" "newvmext" {
+#   name                         = "newvmext"
+#   virtual_machine_scale_set_id = azurerm_linux_virtual_machine_scale_set.buildagent-vmss.id
+#   publisher                    = "Microsoft.Azure.Extensions"
+#   type                         = "CustomScript"
+#   type_handler_version         = "2.0"
+#   protected_settings           = <<PROT
+#   {
+#     "script": "${base64encode(file(var.scfile))}"
+#   }
+#   PROT
+# }
+
