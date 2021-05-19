@@ -48,7 +48,8 @@ resource "azurerm_virtual_machine_scale_set_extension" "newvmext" {
   })
 }
 
-
+#with protected_settings - (Optional) A JSON String which specifies Sensitive Settings (such as Passwords) for the Extension.
+#----------------------------------------------------------------------------------------------------------------------------
 # resource "azurerm_virtual_machine_scale_set_extension" "newvmext" {
 #   name                         = "newvmext"
 #   virtual_machine_scale_set_id = azurerm_linux_virtual_machine_scale_set.buildagent-vmss.id
