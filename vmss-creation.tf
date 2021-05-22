@@ -9,8 +9,13 @@ resource "azurerm_linux_virtual_machine_scale_set" "buildagent-vmss" {
   single_placement_group = false
 
   admin_username                  = "testadmin"
-  admin_password                  = var.admin_password
-  disable_password_authentication = false
+  #admin_password                  = var.admin_password
+  #disable_password_authentication = false
+  
+  admin_ssh_key {
+    username   = "testadmin"
+    public_key = file(var.PATH_TO_PUBLIC_KEY)
+  }
 
   source_image_reference {
     publisher = "Canonical"
@@ -48,7 +53,8 @@ resource "azurerm_virtual_machine_scale_set_extension" "newvmext" {
   })
 }
 
-#with protected_settings - (Optional) A JSON String which specifies Sensitive Settings (such as Passwords) for the Extension.
+
+  #with protected_settings - (Optional) A JSON String which specifies Sensitive Settings (such as Passwords) for the Extension.
 #----------------------------------------------------------------------------------------------------------------------------
 # resource "azurerm_virtual_machine_scale_set_extension" "newvmext" {
 #   name                         = "newvmext"
@@ -62,4 +68,3 @@ resource "azurerm_virtual_machine_scale_set_extension" "newvmext" {
 #   }
 #   PROT
 # }
-
