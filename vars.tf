@@ -34,3 +34,29 @@ variable "PATH_TO_PRIVATE_KEY" {
   default = "mykey"
 }
 
+######
+
+variable "url" {
+  type = "string"
+  #default = ""
+  description = "Specify the Azure DevOps url"
+}
+
+variable "pat" {
+  type = "string"
+  #default = ""
+  description = "Provide a Personal Access Token (PAT) for Azure DevOps"
+}
+
+variable "pool" {
+  type = "string"
+  #default = ""
+  description = "Name of the agent pool - must exist before"
+}
+
+#The name of the agent
+variable "agent" {
+  type = "string"
+  #default = ""
+  description = "Specify the name of the agent"
+}

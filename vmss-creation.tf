@@ -49,7 +49,8 @@ resource "azurerm_virtual_machine_scale_set_extension" "newvmext" {
   type                         = "CustomScript"
   type_handler_version         = "2.0"
   settings = jsonencode({
-    "script": "${base64encode(file(var.scfile))}"
+    "script": "${base64encode(file(var.scfile))}",
+    "commandToExecute": "bash devops.sh '${var.url}' '${var.pat}' '${var.pool}' '${var.agent}'"
   })
 }
 
