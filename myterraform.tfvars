@@ -1,4 +1,4 @@
-url = "https://dev.azure.com/dhamodharan_1993/"
+url = "https://dev.azure.com/[organization_name]/"
 pat = ""
 pool = "Default"
 agent = "myspecialagent1"
