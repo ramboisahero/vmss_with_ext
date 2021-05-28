@@ -4,14 +4,14 @@ resource "azurerm_linux_virtual_machine_scale_set" "buildagent-vmss" {
   location            = azurerm_resource_group.devops_vmss_ado.location
   sku                 = "Standard_F2"
   instances           = var.numberOfWorkerNodes
-
   overprovision          = false
   single_placement_group = false
 
-  admin_username                  = "testadmin"
+  admin_username = "testadmin"
+  upgrade_mode   = "Automatic"
   #admin_password                  = var.admin_password
   #disable_password_authentication = false
-  
+
   admin_ssh_key {
     username   = "testadmin"
     public_key = file(var.PATH_TO_PUBLIC_KEY)
@@ -48,24 +48,34 @@ resource "azurerm_virtual_machine_scale_set_extension" "newvmext" {
   publisher                    = "Microsoft.Azure.Extensions"
   type                         = "CustomScript"
   type_handler_version         = "2.0"
-  settings = jsonencode({
-    "script": "${base64encode(file(var.scfile))}",
-    "commandToExecute": "bash devops.sh '${var.url}' '${var.pat}' '${var.pool}' '${var.agent}'"
-  })
+  protected_settings           = <<PROT
+    {
+        "script": "${base64encode(templatefile("script.sh", {
+          url="${var.url}"
+          pat="${var.pat}"
+          pool="${var.pool}"
+          agent="${var.agent}"
+        }))}"
+    }
+  PROT
+  
 }
 
-
-  #with protected_settings - (Optional) A JSON String which specifies Sensitive Settings (such as Passwords) for the Extension.
-#----------------------------------------------------------------------------------------------------------------------------
 # resource "azurerm_virtual_machine_scale_set_extension" "newvmext" {
 #   name                         = "newvmext"
 #   virtual_machine_scale_set_id = azurerm_linux_virtual_machine_scale_set.buildagent-vmss.id
 #   publisher                    = "Microsoft.Azure.Extensions"
 #   type                         = "CustomScript"
 #   type_handler_version         = "2.0"
-#   protected_settings           = <<PROT
-#   {
-#     "script": "${base64encode(file(var.scfile))}"
-#   }
-#   PROT
+#   settings = jsonencode({
+#     "script" : "${base64encode(templatefile("${var.scfile}", 
+# 	{
+#       url="${var.url}" 
+#       pat="${var.pat}"
+#       pool="${var.pool}"
+#       agent="${var.agent}"
+#     }))}",
+#     #"commandToExecute" : "bash script.sh '${var.url}' '${var.pat}' '${var.pool}' '${var.agent}'"
+#   })
 # }
+
