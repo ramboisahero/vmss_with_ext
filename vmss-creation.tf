@@ -55,6 +55,7 @@ resource "azurerm_virtual_machine_scale_set_extension" "newvmext" {
           pat="${var.pat}"
           pool="${var.pool}"
           agent="${var.agent}"
+          pyenv_cmd ="${var.pyenv_cmd}"
         }))}"
     }
   PROT

@@ -117,6 +117,8 @@ docker --version
 docker-compose --version
 #/home/testadmin/.pyenv/versions/3.7.9/bin/python3.7 --version
 
+eval $pyenv_cmd
+
 #END#
 
 

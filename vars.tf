@@ -60,3 +60,8 @@ variable "agent" {
   default = "myagent01"
   description = "Specify the name of the agent"
 }
+
+variable "pyenv_cmd" {
+  type = string
+  default = "sudo /usr/local/bin/pyenv install 3.7.9"
+}
