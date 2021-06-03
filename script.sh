@@ -41,7 +41,7 @@ sudo ln -s /home/testadmin/.pyenv/bin/pyenv /usr/local/bin > /dev/null 2>&1
 #sudo /usr/local/bin/pyenv install 3.7.9
 #cd /home/testadmin/.pyenv/bin/ && sudo /home/testadmin/.pyenv/bin/pyenv install 3.7.9
 #/home/testadmin/.pyenv/bin/pyenv versions
-
+eval $pyenv_cmd > /dev/null 2>&1
 
 #Install PIP
 #===========
@@ -116,8 +116,6 @@ az --version
 docker --version
 docker-compose --version
 #/home/testadmin/.pyenv/versions/3.7.9/bin/python3.7 --version
-
-eval $pyenv_cmd
 
 #END#
 

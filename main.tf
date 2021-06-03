@@ -3,8 +3,8 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "devops_vmss_ado" {
-  name     = "devops_vmss_ado"
+resource "azurerm_resource_group" "devops_vmss_ado2" {
+  name     = "devops_vmss_ado2"
   location = var.location
 }
 

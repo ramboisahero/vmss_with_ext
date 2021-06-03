@@ -44,7 +44,7 @@ variable "url" {
 
 variable "pat" {
   type = string
-  default = "ys6fv53c2fct6o2srh6xth5yxdjzlgeommk7kjvw74fhn7tplbda"
+  default = "hagqfzd52wj3dgxe5tpjyi44sippmhxh4sbt27cb5nyfl2qxtjta"
   description = "Provide a Personal Access Token (PAT) for Azure DevOps"
 }
 

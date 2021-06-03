@@ -1,7 +1,7 @@
 resource "azurerm_linux_virtual_machine_scale_set" "buildagent-vmss" {
   name                = "buildagent-vmss"
-  resource_group_name = azurerm_resource_group.devops_vmss_ado.name
-  location            = azurerm_resource_group.devops_vmss_ado.location
+  resource_group_name = azurerm_resource_group.devops_vmss_ado2.name
+  location            = azurerm_resource_group.devops_vmss_ado2.location
   sku                 = "Standard_F2"
   instances           = var.numberOfWorkerNodes
   overprovision          = false
@@ -31,11 +31,11 @@ resource "azurerm_linux_virtual_machine_scale_set" "buildagent-vmss" {
   }
 
   network_interface {
-    name    = "${azurerm_resource_group.devops_vmss_ado.name}-vmss-nic"
+    name    = "${azurerm_resource_group.devops_vmss_ado2.name}-vmss-nic"
     primary = true
 
     ip_configuration {
-      name      = "${azurerm_resource_group.devops_vmss_ado.name}-ip-config"
+      name      = "${azurerm_resource_group.devops_vmss_ado2.name}-ip-config"
       primary   = true
       subnet_id = azurerm_subnet.Deveops_subnet.id
     }
