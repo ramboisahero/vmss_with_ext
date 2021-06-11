@@ -7,13 +7,13 @@ resource "azurerm_linux_virtual_machine_scale_set" "buildagent-vmss" {
   overprovision          = false
   single_placement_group = false
 
-  admin_username = "testadmin"
+  admin_username = "azureuser"
   upgrade_mode   = "Automatic"
   #admin_password                  = var.admin_password
   #disable_password_authentication = false
 
   admin_ssh_key {
-    username   = "testadmin"
+    username   = "azureuser"
     public_key = file(var.PATH_TO_PUBLIC_KEY)
   }
 
